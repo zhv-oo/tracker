@@ -2,14 +2,13 @@ package ru.job4j.pojo;
 
 public class Shop {
     public static int indexOfNull(Product[] products) {
-        int rsl = 0;
-        for (Product tmp : products) {
-            if (tmp == null) {
+        int rsl = -1;
+        for (int i = 0; i < products.length; i++) {
+            if (products[i] == null) {
+                rsl = i;
                 break;
-            } else {
-                rsl++;
             }
         }
-        return rsl == products.length ? -1 : rsl;
+        return rsl;
     }
 }
