@@ -5,11 +5,9 @@ public class Library {
         Book[] lib = new Book[] {new Book("One", 126), new Book("Two", 154),
                 new Book("Three", 88), new Book("Clean code", 144)};
         show(lib);
-        Book tmp = new Book(lib[3].getName(), lib[3].getcPages());
-        lib[3].setName(lib[0].getName());
-        lib[3].setcPages(lib[0].getcPages());
-        lib[0].setName(tmp.getName());
-        lib[0].setcPages(tmp.getcPages());
+        Book tmp = lib[3];
+        lib[3] = lib[0];
+        lib[0] = tmp;
         show(lib);
         show(lib, "Clean code");
     }
