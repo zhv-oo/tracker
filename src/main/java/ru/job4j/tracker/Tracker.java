@@ -30,12 +30,12 @@ public class Tracker {
         int i = 0;
         for (int index = 0; index < size; index++) {
             Item item = items[index];
-            if (item.getName() == key) {
+            if (item.getName().equals(key)) {
                 rsl[i++] = item;
                 break;
             }
         }
-        return Arrays.copyOf(rsl, i + 1);
+        return Arrays.copyOf(rsl, i);
     }
 
     public Item[] findAll() {
