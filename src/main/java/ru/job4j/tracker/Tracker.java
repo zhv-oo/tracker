@@ -25,7 +25,6 @@ public class Tracker {
             Item item = items[index];
             if (item.getName().equals(key)) {
                 rsl[i++] = item;
-                break;
             }
         }
         return Arrays.copyOf(rsl, i);
