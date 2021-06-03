@@ -37,8 +37,6 @@ public class StartUI {
                     } else {
                         System.out.println("Error");
                     }
-                } else {
-                    System.out.println("Item not found!");
                 }
             } else if (select == 3) {
                 System.out.println("=== Delete Items by ID ====");
