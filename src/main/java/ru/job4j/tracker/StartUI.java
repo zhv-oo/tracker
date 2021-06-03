@@ -29,7 +29,6 @@ public class StartUI {
                 System.out.println("=== Edit Items by ID ====");
                 System.out.print("Enter ID: ");
                 int id = Integer.valueOf(scanner.nextLine());
-                if (tracker.findById(id) != null) {
                     System.out.print("Enter new name: ");
                     Item tmp = new Item(scanner.nextLine());
                     if (tracker.replace(id, tmp)) {
@@ -37,7 +36,6 @@ public class StartUI {
                     } else {
                         System.out.println("Error");
                     }
-                }
             } else if (select == 3) {
                 System.out.println("=== Delete Items by ID ====");
                 System.out.print("Enter ID for delete: ");
