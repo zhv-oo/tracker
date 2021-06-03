@@ -39,8 +39,9 @@ public class Tracker {
         if (index != -1) {
             item.setId(id);
             items[index] = item;
+            return true;
         }
-        return index == -1;
+        return false;
     }
 
     public boolean delete(int id) {
