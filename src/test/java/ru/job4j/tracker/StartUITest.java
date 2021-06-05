@@ -98,8 +98,9 @@ public class StartUITest {
     @Test
     public void whenFindByNameAction() {
         Output out = new StubOutput();
+        String name = "test";
         Input in = new StubInput(
-                new String[] {"0", "test", "1"}
+                new String[] {"0", name, "1"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -122,10 +123,12 @@ public class StartUITest {
     @Test
     public void whenFindByIdAction() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"0", "1", "1"}
-        );
+        Item item = new Item("Item");
         Tracker tracker = new Tracker();
+        tracker.add(item);
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(item.getId()), "1"}
+        );
         UserAction[] actions = {
                 new FindByIdAction(out),
                 new ExitAction(out)
@@ -136,7 +139,8 @@ public class StartUITest {
                         + "0. Find item by id" + System.lineSeparator()
                         + "1. Exit" + System.lineSeparator()
                         + "=== Find Items by ID ====" + System.lineSeparator()
-                        + "Item not found!" + System.lineSeparator()
+                        + "Item{id=1, name='Item', created=" + item.getCreated() + "}"
+                        + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Find item by id" + System.lineSeparator()
                         + "1. Exit" + System.lineSeparator()
