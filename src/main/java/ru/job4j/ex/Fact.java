@@ -1,10 +1,6 @@
 package ru.job4j.ex;
 
 public class Fact {
-    public static void main(String[] args) {
-        System.out.println(new Fact().calc(5));
-    }
-
     public int calc(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Argument should be more then zero!");
@@ -14,5 +10,9 @@ public class Fact {
             rsl *= index;
         }
         return rsl;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Fact().calc(5));
     }
 }
