@@ -139,8 +139,7 @@ public class StartUITest {
                         + "0. Find item by id" + System.lineSeparator()
                         + "1. Exit" + System.lineSeparator()
                         + "=== Find Items by ID ====" + System.lineSeparator()
-                        + "Item{id=1, name='Item', created=" + item.getCreated() + "}"
-                        + System.lineSeparator()
+                        + item + System.lineSeparator()
                         + "Menu." + System.lineSeparator()
                         + "0. Find item by id" + System.lineSeparator()
                         + "1. Exit" + System.lineSeparator()
