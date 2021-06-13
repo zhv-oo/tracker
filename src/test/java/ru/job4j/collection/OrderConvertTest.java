@@ -26,4 +26,36 @@ public class OrderConvertTest {
         HashMap<String, Order> map = OrderConvert.process(orders);
         assertThat(map.get("5ffd"), is(new Order("5ffd", "Boots")));
     }
+
+    @Test
+    public void whenAnyOrders() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("5ffd", "Boots"));
+        HashMap<String, Order> map = OrderConvert.process(orders);
+        assertThat(map.size(), is(orders.size()));
+    }
+
+    @Test
+    public void whenDoubleOrders() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("5ffd", "Boots"));
+        orders.add(new Order("5ffd", "Boots"));
+        HashMap<String, Order> map = OrderConvert.process(orders);
+        assertThat(map.size(), is(2));
+    }
+
+    @Test
+    public void whenAnyDoubleOrders() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("3sfe", "Dresses"));
+        orders.add(new Order("5ffd", "Boots"));
+        orders.add(new Order("5ffd", "Boots"));
+        HashMap<String, Order> map = OrderConvert.process(orders);
+        assertThat(map.size(), is(2));
+    }
 }
