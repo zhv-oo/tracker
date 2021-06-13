@@ -29,4 +29,11 @@ public class PhoneDictionaryTest {
         ArrayList<Person> persons = phones.find("487");
         assertThat(persons.size(), is(2));
     }
+
+    @Test
+    public void whenFindEmptyNumber() {
+        PhoneDictionary phones = new PhoneDictionary();
+        ArrayList<Person> persons = phones.find("487");
+        assertThat(persons.size(), is(0));
+    }
 }
