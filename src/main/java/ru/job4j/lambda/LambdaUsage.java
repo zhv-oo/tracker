@@ -9,7 +9,7 @@ public class LambdaUsage {
         List<String> numbers = Arrays.asList("1. Task", "2. Task", "11. Task");
         Comparator<String> cmpDescSize = (left, right) -> {
             System.out.println("String 1: " + left + " String 2: " + right);
-            return right.length() - left.length();
+            return Integer.compare(right.length(), left.length());
         };
         numbers.sort(cmpDescSize);
         System.out.println(numbers);
