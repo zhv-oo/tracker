@@ -16,7 +16,13 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public ArrayList<Person> find(String key) {
-        Predicate<Person> combine = (k) -> persons.contains(k);
+
+        Predicate<Person> preName = (k) -> k.getName().contains(key);
+        Predicate<Person> preSurname = (k) -> k.getSurname().contains(key);
+        Predicate<Person> prePhone = (k) -> k.getPhone().contains(key);
+        Predicate<Person> preAdress = (k) -> k.getAddress().contains(key);
+        Predicate<Person> combine = (k) -> preName.test(k) || preSurname.test(k)
+                                            || prePhone.test(k) || preAdress.test(k);
         ArrayList<Person> result = new ArrayList<>();
         for (Person person : persons) {
             if (combine.test(person)) {
