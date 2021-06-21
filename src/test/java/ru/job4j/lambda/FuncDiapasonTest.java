@@ -17,8 +17,8 @@ public class FuncDiapasonTest {
 
     @Test
     public void whenPow2FunctionThenLinearResults() {
-        List<Double> result = FuncDiapason.diapason(-2, 2, x -> 4 * Math.pow(x, 2) + 2 * x + 1);
-        List<Double> expected = Arrays.asList(13D, 3D, 1D, 7D);
+        List<Double> result = FuncDiapason.diapason(-2, 2, x -> x * x);
+        List<Double> expected = Arrays.asList(4D, 1D, 0D, 1D);
         assertThat(result, is(expected));
     }
 
