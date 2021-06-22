@@ -8,9 +8,8 @@ public class Profiles {
     public List<Address> collect(List<Profile> profiles) {
         return profiles.stream()
                 .map(Profile::getAddress)
-                .sorted(new SortByCity())
+                .sorted(Comparator.comparing(Address::getCity))
                 .distinct()
                 .collect(Collectors.toList());
-
     }
 }
