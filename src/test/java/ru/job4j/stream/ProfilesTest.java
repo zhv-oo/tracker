@@ -34,4 +34,19 @@ public class ProfilesTest {
         Address expected = profileList.get(2).getAddress();
         assertEquals(expected, addressList.get(2));
     }
+
+    @Test
+    public void whenCollectSortAndWithoutDouble() {
+        List<Profile> profileList = List.of(
+                new Profile(new Address("Rostov", "Lenina", 20, 11)),
+                new Profile(new Address("Norilsk", "Sovetskaya", 3, 3)),
+                new Profile(new Address("Norilsk", "Sovetskaya", 3, 3)),
+                new Profile(new Address("Anapa", "Frunze", 31, 12))
+        );
+        Profiles profiles = new Profiles();
+        List<Address> addressList = profiles.collect(profileList);
+        Address expected = profileList.get(3).getAddress();
+        assertEquals(expected, addressList.get(0));
+        assertThat(addressList.size(), is(3));
+    }
 }
