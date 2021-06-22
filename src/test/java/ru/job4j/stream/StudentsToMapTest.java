@@ -1,10 +1,10 @@
 package ru.job4j.stream;
 
-import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class StudentsToMapTest {
@@ -21,7 +21,7 @@ public class StudentsToMapTest {
         assertEquals(students.get(2), result.get("Krasnov"));
     }
 
-    @Test (expected = IllegalStateException.class)
+    @Test
     public void whenDuplicateKey() {
         StudentsToMap stm = new StudentsToMap();
         List<Student> students = List.of(
@@ -31,5 +31,6 @@ public class StudentsToMapTest {
                 new Student(5, "Sidorov")
         );
         Map<String, Student> result = stm.listToMap(students);
+        assertThat(result.size(), is(3));
     }
 }
