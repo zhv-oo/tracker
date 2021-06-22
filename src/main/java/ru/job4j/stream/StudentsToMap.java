@@ -10,6 +10,7 @@ public class StudentsToMap {
                 .collect(Collectors.toMap(
                         key -> key.getSurname(),
                         value -> value
+
                 ));
     }
 }
