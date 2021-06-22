@@ -11,8 +11,7 @@ public class StudentsToMap {
                 .collect(Collectors.toMap(
                         key -> key.getSurname(),
                         value -> value,
-                        (value, value2) -> value.equals(value2.getSurname())
-                                ? value : value2
+                        (value, value2) -> value
                 ));
     }
 }
