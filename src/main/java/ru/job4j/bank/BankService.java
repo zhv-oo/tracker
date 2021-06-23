@@ -1,6 +1,8 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Stream;
+
 /**
  * Класс описывает работу простеших банковских операций
  * @author OLEG ZHV
@@ -40,14 +42,11 @@ public class BankService {
      * @return возвращает найденого пользователя или null если не найден
      */
     public User findByPassport(String passport) {
-        User rsl = null;
-        for (Map.Entry<User, List<Account>> tmp: users.entrySet()) {
-            if (tmp.getKey().getPassport().equals(passport)) {
-                rsl = tmp.getKey();
-                break;
-            }
-        }
-        return rsl;
+        return users.keySet()
+                .stream()
+                .filter(obj -> obj.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -57,17 +56,25 @@ public class BankService {
      * @return возвращает найденый счет или null если счет не найден
      */
     public Account findByRequisite(String passport, String requisite) {
-        Account rsl = null;
+//        Account rsl = null;
+//        List<Account> accounts = users.get(this.findByPassport(passport));
+//        if (accounts != null) {
+//            for (Account account : accounts) {
+//                if (account.getRequisite().equals(requisite)) {
+//                    rsl = account;
+//                    break;
+//                }
+//            }
+//        }
         List<Account> accounts = users.get(this.findByPassport(passport));
         if (accounts != null) {
-            for (Account account : accounts) {
-                if (account.getRequisite().equals(requisite)) {
-                    rsl = account;
-                    break;
-                }
-            }
+            return users.get(this.findByPassport(passport))
+                    .stream()
+                    .filter(obj -> obj.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
-        return rsl;
+        return null;
     }
 
     /**
