@@ -1,7 +1,6 @@
 package ru.job4j.bank;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Класс описывает работу простеших банковских операций
@@ -56,16 +55,6 @@ public class BankService {
      * @return возвращает найденый счет или null если счет не найден
      */
     public Account findByRequisite(String passport, String requisite) {
-//        Account rsl = null;
-//        List<Account> accounts = users.get(this.findByPassport(passport));
-//        if (accounts != null) {
-//            for (Account account : accounts) {
-//                if (account.getRequisite().equals(requisite)) {
-//                    rsl = account;
-//                    break;
-//                }
-//            }
-//        }
         List<Account> accounts = users.get(this.findByPassport(passport));
         if (accounts != null) {
             return users.get(this.findByPassport(passport))
