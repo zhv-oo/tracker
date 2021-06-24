@@ -31,7 +31,7 @@ public class BankService {
     public void addAccount(String passport, Account account) {
         Optional<User> chk = this.findByPassport(passport);
         if (chk.isPresent()) {
-            List<Account> accounts = users.get(this.findByPassport(passport).get());
+            List<Account> accounts = users.get(chk.get());
             if (accounts != null && !accounts.contains(account)) {
                 accounts.add(account);
             }
@@ -41,7 +41,7 @@ public class BankService {
     /**
      * Метод позволяет найти пользователя по номеру пасспотра
      * @param passport номер паспорта
-     * @return возвращает найденого пользователя или null если не найден
+     * @return возвращает Optional<User> c найденым пользователем или Optional.empty если не найден
      */
     public Optional<User> findByPassport(String passport) {
         return users.keySet()
@@ -54,13 +54,13 @@ public class BankService {
      * Метод позволяет получить счет по реквизитам состоящий из
      * @param passport номера пасспорта
      * @param requisite номера счет
-     * @return возвращает найденый счет или null если счет не найден
+     * @return возвращает Optional<Account> c найденым счетом или Optional.empty если не найден
      */
     public Optional<Account> findByRequisite(String passport, String requisite) {
         Optional<Account> rsl = Optional.empty();
         Optional<User> chk = this.findByPassport(passport);
         if (chk.isPresent()) {
-            return users.get(this.findByPassport(passport).get())
+            return users.get(chk.get())
                     .stream()
                     .filter(obj -> obj.getRequisite().equals(requisite))
                     .findFirst();
@@ -82,9 +82,7 @@ public class BankService {
         boolean rsl = false;
         Account srcAccount = findByRequisite(srcPassport, srcRequisite).get();
         Account dstAccount = findByRequisite(destPassport, destRequisite).get();
-        if (srcAccount != null
-                && srcAccount.getBalance() >= amount
-                && dstAccount != null) {
+        if (srcAccount.getBalance() >= amount) {
             srcAccount.setBalance(srcAccount.getBalance() - amount);
             dstAccount.setBalance(dstAccount.getBalance() + amount);
             rsl = true;
