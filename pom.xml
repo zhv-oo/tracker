@@ -32,7 +32,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -54,9 +53,9 @@
     </dependencies>
     <profiles>
         <profile>
-            <id>test</id>
+            <id>runtime</id>
             <properties>
-                <db.url>jdbc:h2:~/testdb;MODE=PostgreSQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;</db.url>
+                <db.url>jdbc:h2:~/mem:test;MODE=PostgreSQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;</db.url>
                 <db.username></db.username>
                 <db.password></db.password>
                 <db.driver>org.h2.Driver</db.driver>
