@@ -45,7 +45,6 @@ public class SqlTrackerTest {
         }
     }
 
-    @Ignore
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -54,7 +53,6 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
-    @Ignore
     @Test
     public void whenDelete() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -65,7 +63,6 @@ public class SqlTrackerTest {
         assertThat(tracker.findAll().size(), is(0));
     }
 
-    @Ignore
     @Test
     public void whenFindAll() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -76,7 +73,6 @@ public class SqlTrackerTest {
         assertThat(tracker.findAll().size(), is(2));
     }
 
-    @Ignore
     @Test
     public void whenFindByName() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -87,7 +83,6 @@ public class SqlTrackerTest {
         assertThat(tracker.findByName("itemTwo").get(0), is(itemTwo));
     }
 
-    @Ignore
     @Test
     public void whenReplace() {
         SqlTracker tracker = new SqlTracker(connection);

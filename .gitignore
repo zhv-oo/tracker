@@ -28,3 +28,7 @@ hs_err_pid*
 target
 out
 app.properties
+
+#h2_bd_files
+*.mv.db
+*.trace.db
