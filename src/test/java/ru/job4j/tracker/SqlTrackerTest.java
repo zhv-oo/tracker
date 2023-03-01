@@ -1,7 +1,11 @@
 package ru.job4j.tracker;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,16 +13,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.*;
 public class SqlTrackerTest {
-
     private static Connection connection;
 
-    @BeforeClass
+    @BeforeAll
     public static void initConnection() {
-        try (InputStream in = SqlTrackerTest.class.getClassLoader()
-                .getResourceAsStream("./test.properties")) {
+        try (InputStream in = new FileInputStream("db/liquibase_test.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -33,39 +34,36 @@ public class SqlTrackerTest {
         }
     }
 
-    @AfterClass
+    @AfterAll
     public static void closeConnection() throws SQLException {
         connection.close();
     }
 
-    @After
+    @AfterEach
     public void wipeTable() throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("delete from items")) {
             statement.execute();
         }
     }
 
-    @Ignore
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
         tracker.add(item);
-        assertThat(tracker.findById(item.getId()), is(item));
+        assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
 
-    @Ignore
     @Test
     public void whenDelete() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
         tracker.add(item);
-        assertThat(tracker.findById(item.getId()), is(item));
+        assertThat(tracker.findById(item.getId())).isEqualTo(item);
         tracker.delete(item.getId());
-        assertThat(tracker.findAll().size(), is(0));
+        assertThat(tracker.findAll().size()).isEqualTo(0);
     }
 
-    @Ignore
     @Test
     public void whenFindAll() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -73,10 +71,9 @@ public class SqlTrackerTest {
         Item itemTwo = new Item("itemTwo");
         tracker.add(item);
         tracker.add(itemTwo);
-        assertThat(tracker.findAll().size(), is(2));
+        assertThat(tracker.findAll().size()).isEqualTo(2);
     }
 
-    @Ignore
     @Test
     public void whenFindByName() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -84,10 +81,9 @@ public class SqlTrackerTest {
         Item itemTwo = new Item("itemTwo");
         tracker.add(item);
         tracker.add(itemTwo);
-        assertThat(tracker.findByName("itemTwo").get(0), is(itemTwo));
+        assertThat(tracker.findByName("itemTwo").get(0)).isEqualTo(itemTwo);
     }
 
-    @Ignore
     @Test
     public void whenReplace() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -95,7 +91,7 @@ public class SqlTrackerTest {
         Item itemTwo = new Item("itemTwo");
         tracker.add(item);
         tracker.replace(item.getId(), itemTwo);
-        assertThat(tracker.findById(item.getId()), is(tracker.findByName("itemTwo").get(0)));
-        assertThat(tracker.findAll().size(), is(1));
+        assertThat(tracker.findById(item.getId())).isEqualTo(tracker.findByName("itemTwo").get(0));
+        assertThat(tracker.findAll().size()).isEqualTo(1);
     }
 }
